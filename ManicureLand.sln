@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManicureLand", "ManicureLand\ManicureLand.csproj", "{85D35615-2CCB-4C4B-8340-72F20E60DA84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85D35615-2CCB-4C4B-8340-72F20E60DA84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85D35615-2CCB-4C4B-8340-72F20E60DA84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85D35615-2CCB-4C4B-8340-72F20E60DA84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85D35615-2CCB-4C4B-8340-72F20E60DA84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6EBCA7E9-D86B-4833-A86C-77108852768C}
+	EndGlobalSection
+EndGlobal
