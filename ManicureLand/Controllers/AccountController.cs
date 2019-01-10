@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManicureLand.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,18 +18,12 @@ namespace ManicureLand.Controllers
 
         public ActionResult Register()
         {
-
+            DBAccess db = new DBAccess();
+            db.Test();
             ViewBag.Message = "Registra una cuenta";
 
             return View();
         }
-
-        public ActionResult juanito()
-        {
-
-            ViewBag.Message = "Registra una cuenta";
-
-            return View();
-        }
+        
     }
 }
