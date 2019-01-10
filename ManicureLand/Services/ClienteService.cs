@@ -15,10 +15,10 @@ namespace ManicureLand.Services
 
         }
 
-        public Cliente buscarCliente(string nombreCampo, string valorCampo) {
-            Cliente cliente = new Cliente();
+        public List<Cliente> buscarCliente(string nombreCampo, string valorCampo) {
+            List<Cliente> listaCliente = new List<Cliente>();
 
-            return cliente;
+            return listaCliente;
         }
 
         public List<Cliente> listarClientes() {

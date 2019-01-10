@@ -22,5 +22,13 @@ namespace ManicureLand.Controllers
 
             return View();
         }
+
+        public ActionResult juanito()
+        {
+
+            ViewBag.Message = "Registra una cuenta";
+
+            return View();
+        }
     }
 }
