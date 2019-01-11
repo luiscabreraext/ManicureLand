@@ -22,7 +22,6 @@ namespace ManicureLand.Services
         {
             try
             {
-                //if ((campos.Count != parametros.Count) || campos.Count < 1 || parametros.Count < 1 || tabla.Length < 1)
                 if (parametros.Count < 1 || tabla.Length < 1)
                 {
                     return false;
@@ -53,7 +52,6 @@ namespace ManicureLand.Services
                         query = query + ") VALUES(" + paramX + ")";
                     }
                     command.Parameters.AddWithValue(param, parametros[i].Value);
-                    //command.Parameters.Add(parametros[i]);
                 }
 
                 command.CommandType = CommandType.Text;

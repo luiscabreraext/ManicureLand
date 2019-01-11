@@ -27,7 +27,6 @@ namespace ManicureLand.Controllers
 
         public ActionResult Registrar(Cliente cliente)
         {
-            //implementar función de registro pasando el modelo por parametro
             ClienteService clienteService = new ClienteService();
             if (clienteService.RegistrarCliente(cliente))
             {
