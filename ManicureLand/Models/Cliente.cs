@@ -16,11 +16,16 @@ namespace ManicureLand.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaNacimiento { get; set; }
+
         public string Correo { get; set; }
         public string Clave { get; set; }
         public string TelefonoFijo { get; set; }
         public string TelefonoMovil { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaRegistro { get; set; }
+
         public int Advertencias { get; set; }
         public Boolean Estado { get; set; }
 

@@ -2,6 +2,7 @@
 using ManicureLand.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,9 +29,7 @@ namespace ManicureLand.Controllers
         {
             //implementar función de registro pasando el modelo por parametro
             ClienteService clienteService = new ClienteService();
-            bool respuesta;
-            respuesta = clienteService.registrarCliente(cliente);
-            if (respuesta)
+            if (clienteService.RegistrarCliente(cliente))
             {
                 ViewBag.Message = "Cuenta Registrada";
                 return RedirectToAction("Index", "Home");

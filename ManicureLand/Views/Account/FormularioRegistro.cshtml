@@ -7,7 +7,7 @@
 <h2>Register</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Registrar","Account", FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
@@ -93,9 +93,9 @@
         </div>
     </div>
 
-    <div>
+    @*<div>
         @Html.ActionLink("Account", "Registrar", Cliente)
-    </div>
+    </div>*@
 }
 
 @section Scripts {
