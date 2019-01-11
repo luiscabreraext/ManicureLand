@@ -25,6 +25,13 @@ namespace ManicureLand.Controllers
             return View();
         }
 
+        public ActionResult RegistroProducto()
+        {
+            ViewBag.Message = "Registra una producto";
+
+            return View();
+        }
+
         public ActionResult Registrar(Cliente cliente)
         {
             ClienteService clienteService = new ClienteService();
@@ -39,6 +46,19 @@ namespace ManicureLand.Controllers
                 return RedirectToAction("FormularioRegistro", "Account");
             }
             
+        }
+
+        public ActionResult RegistrarProd(Producto prod)
+        {
+            ProductoService productoService = new ProductoService();
+            if (productoService.RegistrarProd(prod))
+            {
+                return RedirectToAction("FormularioRegistro", "Account");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
     }
