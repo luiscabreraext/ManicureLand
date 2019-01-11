@@ -1,4 +1,5 @@
-﻿using ManicureLand.Services;
+﻿using ManicureLand.Models;
+using ManicureLand.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,31 @@ namespace ManicureLand.Controllers
 
         }
 
-        public ActionResult Register()
+        public ActionResult FormularioRegistro()
         {
-            DBAccess db = new DBAccess();
-            db.Test();
             ViewBag.Message = "Registra una cuenta";
 
             return View();
         }
-        
+
+        public ActionResult Registrar(Cliente cliente)
+        {
+            //implementar función de registro pasando el modelo por parametro
+            ClienteService clienteService = new ClienteService();
+            bool respuesta;
+            respuesta = clienteService.registrarCliente(cliente);
+            if (respuesta)
+            {
+                ViewBag.Message = "Cuenta Registrada";
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.Message = "Error al registrar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                return RedirectToAction("FormularioRegistro", "Account");
+            }
+            
+        }
+
     }
 }
