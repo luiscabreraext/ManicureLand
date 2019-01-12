@@ -18,6 +18,11 @@ namespace ManicureLand.Controllers
 
         }
 
+        public ActionResult Ingresar(Cliente cliente)
+        {
+            return View();
+        }
+
         public ActionResult FormularioRegistro()
         {
             ViewBag.Message = "Registra una cuenta";

@@ -1,6 +1,26 @@
-﻿@{
+﻿@model ManicureLand.Models.Cliente
+
+@{
     ViewBag.Title = "Manicure Land";
 }
+
+<script type="text/javascript">
+    var data = { "usuario": "usuario", "clave": "clave" };
+    function Ingresar() {
+        $.ajax({
+            url: "/Account/Ingresar",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (data) {
+
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+    });
+</script>
 
 <div class="col-md-12">
     <br />
@@ -8,16 +28,48 @@
         <h1>Bienvenidos</h1>
     </div>
     <div class="col-md-3">
-        <form class="form-group">
-            <label class="col-lg-4">Usuario</label>
-            <input class="col-lg-8 input-sm" placeholder="correo@algo.com" />
-            <label class="col-lg-4">Clave</label>
-            <input class="col-lg-8 input-sm" placeholder="******" />
-            <label class="col-lg-12"> </label>
-            <input class="col-lg-5 btn-primary btn-sm" id="btnIngresar" name="btnIngresar" runat="server" onserverclick="btnIngresarOnClick" type="button" value="Ingresar" />
-            <label class="col-lg-2"> </label>
-            <input class="col-lg-5 btn-info btn-sm" id="btnRegistrar" name="btnRegistrar" runat="server" onserverclick="btnRegistrarOnClick" type="button" value="Registrarse" />
-        </form>
+        @using (Html.BeginForm("Ingresar", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                    @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Clave, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Clave, new { htmlAttributes = new { @class = "form-control col-md-12", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <label ><br /></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 center-block">
+                    <input class="btn-primary btn-sm col-md-12" type="submit" value="Ingresar" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6 center-block">
+                    <input class="btn-success btn-sm col-md-12" type="button" value="Registrarse" onclick="location.href='@Url.Action("FormularioRegistro", "Account")'" />
+                </div>
+            </div>
+
+
+
+
+        }
     </div>
 
 </div>
