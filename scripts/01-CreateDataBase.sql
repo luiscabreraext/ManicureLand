@@ -49,7 +49,7 @@ CREATE TABLE [dbo].[Diseno](
 	[descripcion] [varchar](32) NOT NULL,
 	[tiempoEstimado] [int] NOT NULL,
 	[precio] [int] NOT NULL,
-	[observacion] [varchar](255 NULL),
+	[observacion] [varchar](255) NULL,
 	[urlDiseno] [varchar](MAX) NULL,
 	[estado] [bit] NOT NULL
 	)
@@ -73,7 +73,7 @@ GO
 
 CREATE TABLE [dbo].[Dedo](
 	[idDedo] [int] IDENTITY(1,1) NOT NULL,
-	[extremidad] [CHAR][2] NOT NULL,
+	[extremidad] [CHAR](2) NOT NULL,
 	[descripción] [int] NOT NULL	
 	)
 GO
