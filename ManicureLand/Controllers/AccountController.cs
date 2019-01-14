@@ -11,11 +11,9 @@ namespace ManicureLand.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
         public ActionResult Index()
         {
             return View();
-
         }
 
         public ActionResult Ingresar(Cliente cliente)
@@ -25,16 +23,21 @@ namespace ManicureLand.Controllers
 
         public ActionResult FormularioRegistro()
         {
-            ViewBag.Message = "Registra una cuenta";
-
             return View();
         }
 
-        public ActionResult RegistroProducto()
+        public ActionResult MisDatos(Cliente cliente)
         {
-            ViewBag.Message = "Registra una producto";
-
-            return View();
+            ClienteService clienteService = new ClienteService();
+            if (clienteService.ObtenerCliente(out cliente))
+            {
+                return View(cliente);
+            }
+            else
+            {
+                ViewBag.Message = "Error al recupoerar información de la cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                return RedirectToAction("Index", "Home");
+            }            
         }
 
         public ActionResult Registrar(Cliente cliente)
@@ -50,21 +53,35 @@ namespace ManicureLand.Controllers
                 ViewBag.Message = "Error al registrar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
                 return RedirectToAction("FormularioRegistro", "Account");
             }
-            
         }
 
-        public ActionResult RegistrarProd(Producto prod)
+        public ActionResult Modificar(Cliente cliente)
         {
-            ProductoService productoService = new ProductoService();
-            if (productoService.RegistrarProd(prod))
+            ClienteService clienteService = new ClienteService();
+            if (clienteService.ModificarCliente(cliente))
             {
-                return RedirectToAction("FormularioRegistro", "Account");
+                ViewBag.Message = "Datos modificados Exitosamente";
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                ViewBag.Message = "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132";
             }
+            return RedirectToAction("MisDatos", "Account");
         }
 
+        public ActionResult Deshabilitar(Cliente cliente)
+        {
+            ClienteService clienteService = new ClienteService();
+            if (clienteService.DeshabilitarCliente(cliente))
+            {
+                ViewBag.Message = "Cuenta deshabilitada exitosamente";
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.Message = "Error al deshabilitar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                return RedirectToAction("MisDatos", "Account");
+            }
+        }
     }
 }

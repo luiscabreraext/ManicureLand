@@ -9,7 +9,7 @@ namespace ManicureLand.Models
 {
     public class Cliente
     {
-        public int Id { get; set; }
+        public int IdCliente { get; set; }
 
         [DisplayName("Nombres")]
         [StringLength(64), Required(ErrorMessage = "Campo Requerido")]
@@ -27,7 +27,7 @@ namespace ManicureLand.Models
         public string ApellidoMaterno { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Debe indicar la fecha correcta")]
         public DateTime FechaNacimiento { get; set; }
 
@@ -37,7 +37,7 @@ namespace ManicureLand.Models
                    ErrorMessage = "Formato de correo incorrecto de telefono, use un formato algo@algo.com")]
         public string Correo { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z0-9]{1}[a-zA-Z0-9!@#\$\*&]{3,31}$",
+        [RegularExpression(@"^[a-zA-Z]{1}[a-zA-Z0-9!@#\$\*&]{3,31}$",
                   ErrorMessage = "Su contraseña debe empezar por una letra seguida de números, letras o los simbolos !, @, #, $, &, o * con un mínimo de 4 caracteres y máximo 32.")]
         [Compare("RepetirClave", ErrorMessage = "Las constraseñas no coinciden")]
         public string Clave { get; set; }
@@ -48,12 +48,8 @@ namespace ManicureLand.Models
 
         [RegularExpression(@"^[\+]{1}[0-9]{11}$",
                    ErrorMessage = "Formato incorrecto de telefono, use +56212345678.")]
-        public string TelefonoFijo { get; set; }
-
-        [RegularExpression(@"^[\+]{1}[0-9]{11}$",
-                   ErrorMessage = "Formato incorrecto de telefono, use +56912345678.")]
-        public string TelefonoMovil { get; set; }
-
+        public string Telefono { get; set; }
+        
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaRegistro { get; set; }
@@ -64,17 +60,16 @@ namespace ManicureLand.Models
         public Cliente() {
         }
 
-        public Cliente(int id, string nombres, string apellidoPaterno, string apellidoMaterno, DateTime fechaNacimiento,
-            string correo, string clave, string telefonoFijo, string telefonoMovil) {
-            this.Id = id;
+        public Cliente(int idCliente, string nombres, string apellidoPaterno, string apellidoMaterno, DateTime fechaNacimiento,
+            string correo, string clave, string telefono) {
+            this.IdCliente = idCliente;
             this.Nombres = nombres;
             this.ApellidoPaterno = apellidoPaterno;
             this.ApellidoMaterno = ApellidoMaterno;
             this.FechaNacimiento = fechaNacimiento;
             this.Correo = correo;
             this.Clave = clave;
-            this.TelefonoFijo = telefonoFijo;
-            this.TelefonoMovil = telefonoMovil;
+            this.Telefono = telefono;
             this.FechaRegistro = DateTime.Now;
             this.Advertencias = 0;
             this.Estado = true;      

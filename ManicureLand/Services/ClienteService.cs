@@ -9,14 +9,32 @@ namespace ManicureLand.Services
 {
     public class ClienteService
     {
-        public Cliente ObtenerCliente(int id) {
-            Cliente cliente = new Cliente();
-            
-            return cliente;
-
+        public bool ObtenerCliente(out Cliente cliente)
+        {
+            Cliente clienteEncontrado = new Cliente();
+            clienteEncontrado.IdCliente = 1;
+            clienteEncontrado.Nombres = "test";
+            clienteEncontrado.ApellidoPaterno = "test";
+            clienteEncontrado.ApellidoMaterno = "test";
+            clienteEncontrado.Correo = "test@test.cl";
+            clienteEncontrado.FechaNacimiento = DateTime.Parse("25-10-1984");
+            clienteEncontrado.FechaRegistro = DateTime.Parse("31-12-2018");
+            clienteEncontrado.Telefono = "+56987654321";
+            cliente = clienteEncontrado;
+            return true;
         }
 
-        public List<Cliente> BuscarCliente(string nombreCampo, string valorCampo) {
+        public bool ModificarCliente(Cliente cliente)
+        {
+            return true;
+        }
+
+        public bool DeshabilitarCliente(Cliente cliente)
+        {
+            return true;
+        }
+
+        public List<Cliente> BuscarClientes(string nombreCampo, string valorCampo) {
             List<Cliente> listaCliente = new List<Cliente>();
             //sqldatareader
             return listaCliente;
@@ -24,14 +42,6 @@ namespace ManicureLand.Services
 
         public List<Cliente> ListarClientes() {
             List<Cliente> listaClientes = new List<Cliente>();
-
-            Cliente cliente1 = new Cliente(1,"Juana María","Perez","Contreras", new DateTime(1990,12,8),"juanamaria@gmail.com", "e99a18c428cb38d5f260853678922e03","","+56997057307");
-            Cliente cliente2 = new Cliente(1, "Juana María 2", "Perez", "Contreras", new DateTime(1990, 12, 8), "juanamaria@gmail.com", "e99a18c428cb38d5f260853678922e03", "", "+56997057307");
-            Cliente cliente3 = new Cliente(1, "Juana María 3", "Perez", "Contreras", new DateTime(1990, 12, 8), "juanamaria@gmail.com", "e99a18c428cb38d5f260853678922e03", "", "+56997057307");
-
-            listaClientes.Add(cliente1);
-            listaClientes.Add(cliente2);
-            listaClientes.Add(cliente3);
             return listaClientes;
         }
 
@@ -45,8 +55,7 @@ namespace ManicureLand.Services
                 new SqlParameter("fechaNacimiento", cliente.FechaNacimiento),
                 new SqlParameter("correo", cliente.Correo),
                 new SqlParameter("clave", cliente.Clave),
-                new SqlParameter("telefonoFijo", cliente.TelefonoFijo),
-                new SqlParameter("telefonoMovil", cliente.TelefonoMovil),
+                new SqlParameter("telefono", cliente.Telefono),
                 new SqlParameter("fechaRegistro", DateTime.Now),
                 new SqlParameter("advertencias", int.Parse("0")),
                 new SqlParameter("estado", (bool)true)
