@@ -1,9 +1,11 @@
 CREATE DATABASE [ManicureLand]
 GO
+
 USE [ManicureLand]
 GO
+
 CREATE TABLE [dbo].[Cliente](
-	[idCliente] [int] IDENTITY(1,1) NOT NULL,
+	[idCliente] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[nombres] [varchar](64) NOT NULL,
 	[apellidoPaterno] [varchar](32) NOT NULL,
 	[apellidoMaterno] [varchar](32) NULL,
@@ -18,7 +20,7 @@ CREATE TABLE [dbo].[Cliente](
 GO
 
 CREATE TABLE [dbo].[Empleado](
-	[idEmpleado] [int] IDENTITY(1,1) NOT NULL,
+	[idEmpleado] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[nombres] [varchar](64) NOT NULL,
 	[apellidoPaterno] [varchar](32) NOT NULL,
 	[apellidoMaterno] [varchar](32) NULL,
@@ -34,7 +36,7 @@ CREATE TABLE [dbo].[Empleado](
 GO
 
 CREATE TABLE [dbo].[Servicio](
-	[idServicio] [int] IDENTITY(1,1) NOT NULL,
+	[idServicio] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[descripcion] [varchar](32) NOT NULL,
 	[tiempoEstimado] [int] NOT NULL,
 	[precio] [int] NOT NULL,
@@ -45,7 +47,7 @@ CREATE TABLE [dbo].[Servicio](
 GO
 
 CREATE TABLE [dbo].[Diseno](
-	[idDiseno] [int] IDENTITY(1,1) NOT NULL,
+	[idDiseno] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[descripcion] [varchar](32) NOT NULL,
 	[tiempoEstimado] [int] NOT NULL,
 	[precio] [int] NOT NULL,
@@ -56,7 +58,7 @@ CREATE TABLE [dbo].[Diseno](
 GO
 
 CREATE TABLE [dbo].[Reserva](
-	[idReserva] [int] IDENTITY(1,1) NOT NULL,
+	[idReserva] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[idManicurista] [int] NOT NULL,
 	[idCliente] [int] NOT NULL,
 	[tiempoEstimado] [int] NOT NULL,
@@ -72,14 +74,14 @@ CREATE TABLE [dbo].[Reserva](
 GO
 
 CREATE TABLE [dbo].[Dedo](
-	[idDedo] [int] IDENTITY(1,1) NOT NULL,
+	[idDedo] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[extremidad] [CHAR](2) NOT NULL,
 	[descripción] [int] NOT NULL	
 	)
 GO
 
 CREATE TABLE [dbo].[Turno](
-	[idTurno] [int] IDENTITY(1,1) NOT NULL,
+	[idTurno] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[idManicurista] [int] NOT NULL,	
 	[fechaInico] [datetime] NOT NULL,
 	[fechatermino] [datetime] NOT NULL,
@@ -113,4 +115,90 @@ CREATE TABLE [dbo].[ReservaServicio](
 	[idReserva] [int] NOT NULL,
 	[idServicio] [int] NOT NULL
 	)
+GO
+
+------------------- CREACION DE LLAVES FORANEAS -------------------
+
+ALTER TABLE [dbo].[CatalogoDiseno]  WITH CHECK ADD  CONSTRAINT [FK_CatalogoDiseno_Diseno] FOREIGN KEY([idDiseno])
+REFERENCES [dbo].[Diseno] ([idDiseno])
+GO
+
+ALTER TABLE [dbo].[CatalogoDiseno] CHECK CONSTRAINT [FK_CatalogoDiseno_Diseno]
+GO
+
+ALTER TABLE [dbo].[CatalogoDiseno]  WITH CHECK ADD  CONSTRAINT [FK_CatalogoDiseno_Empleado] FOREIGN KEY([idManicurista])
+REFERENCES [dbo].[Empleado] ([idEmpleado])
+GO
+
+ALTER TABLE [dbo].[CatalogoDiseno] CHECK CONSTRAINT [FK_CatalogoDiseno_Empleado]
+GO
+
+ALTER TABLE [dbo].[CatalogoServicio]  WITH CHECK ADD  CONSTRAINT [FK_CatalogoServicio_Empleado] FOREIGN KEY([idManicurista])
+REFERENCES [dbo].[Empleado] ([idEmpleado])
+GO
+
+ALTER TABLE [dbo].[CatalogoServicio] CHECK CONSTRAINT [FK_CatalogoServicio_Empleado]
+GO
+
+ALTER TABLE [dbo].[CatalogoServicio]  WITH CHECK ADD  CONSTRAINT [FK_CatalogoServicio_Servicio] FOREIGN KEY([idServicio])
+REFERENCES [dbo].[Servicio] ([idServicio])
+GO
+
+ALTER TABLE [dbo].[CatalogoServicio] CHECK CONSTRAINT [FK_CatalogoServicio_Servicio]
+GO
+
+ALTER TABLE [dbo].[Reserva]  WITH CHECK ADD  CONSTRAINT [FK_Reserva_Cliente] FOREIGN KEY([idCliente])
+REFERENCES [dbo].[Cliente] ([idCliente])
+GO
+
+ALTER TABLE [dbo].[Reserva] CHECK CONSTRAINT [FK_Reserva_Cliente]
+GO
+
+ALTER TABLE [dbo].[Reserva]  WITH CHECK ADD  CONSTRAINT [FK_Reserva_Empleado] FOREIGN KEY([idManicurista])
+REFERENCES [dbo].[Empleado] ([idEmpleado])
+GO
+
+ALTER TABLE [dbo].[Reserva] CHECK CONSTRAINT [FK_Reserva_Empleado]
+GO
+
+ALTER TABLE [dbo].[ReservaDedo]  WITH CHECK ADD  CONSTRAINT [FK_ReservaDedo_Dedo] FOREIGN KEY([idDedo])
+REFERENCES [dbo].[Dedo] ([idDedo])
+GO
+
+ALTER TABLE [dbo].[ReservaDedo] CHECK CONSTRAINT [FK_ReservaDedo_Dedo]
+GO
+
+ALTER TABLE [dbo].[ReservaDedo]  WITH CHECK ADD  CONSTRAINT [FK_ReservaDedo_Diseno] FOREIGN KEY([idDiseno])
+REFERENCES [dbo].[Diseno] ([idDiseno])
+GO
+
+ALTER TABLE [dbo].[ReservaDedo] CHECK CONSTRAINT [FK_ReservaDedo_Diseno]
+GO
+
+ALTER TABLE [dbo].[ReservaDedo]  WITH CHECK ADD  CONSTRAINT [FK_ReservaDedo_Reserva] FOREIGN KEY([idReserva])
+REFERENCES [dbo].[Reserva] ([idReserva])
+GO
+
+ALTER TABLE [dbo].[ReservaDedo] CHECK CONSTRAINT [FK_ReservaDedo_Reserva]
+GO
+
+ALTER TABLE [dbo].[ReservaServicio]  WITH CHECK ADD  CONSTRAINT [FK_ReservaServicio_Reserva] FOREIGN KEY([idReserva])
+REFERENCES [dbo].[Reserva] ([idReserva])
+GO
+
+ALTER TABLE [dbo].[ReservaServicio] CHECK CONSTRAINT [FK_ReservaServicio_Reserva]
+GO
+
+ALTER TABLE [dbo].[ReservaServicio]  WITH CHECK ADD  CONSTRAINT [FK_ReservaServicio_Servicio] FOREIGN KEY([idServicio])
+REFERENCES [dbo].[Servicio] ([idServicio])
+GO
+
+ALTER TABLE [dbo].[ReservaServicio] CHECK CONSTRAINT [FK_ReservaServicio_Servicio]
+GO
+
+ALTER TABLE [dbo].[Turno]  WITH CHECK ADD  CONSTRAINT [FK_Turno_Empleado] FOREIGN KEY([idManicurista])
+REFERENCES [dbo].[Empleado] ([idEmpleado])
+GO
+
+ALTER TABLE [dbo].[Turno] CHECK CONSTRAINT [FK_Turno_Empleado]
 GO
