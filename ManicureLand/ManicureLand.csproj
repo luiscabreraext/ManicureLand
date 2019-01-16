@@ -149,12 +149,24 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CajeraController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManicuristaController.cs" />
+    <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatalogoDiseno.cs" />
+    <Compile Include="Models\CatalogoServicio.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Dedo.cs" />
     <Compile Include="Models\Diseno.cs" />
+    <Compile Include="Models\Empleado.cs" />
+    <Compile Include="Models\Reserva.cs" />
+    <Compile Include="Models\ReservaDedo.cs" />
+    <Compile Include="Models\ReservaServicio.cs" />
+    <Compile Include="Models\Servicio.cs" />
+    <Compile Include="Models\Turno.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\DBAccess.cs" />
@@ -201,6 +213,17 @@
     <Content Include="Views\Account\FormularioRegistro.cshtml" />
     <Content Include="Views\Account\MisDatos.cshtml" />
     <Content Include="Views\Admin\Diseno.cshtml" />
+    <Content Include="Views\Admin\Panel.cshtml" />
+    <Content Include="Views\Admin\Empleado.cshtml" />
+    <Content Include="Views\Admin\Servicio.cshtml" />
+    <Content Include="Views\Admin\CatalogoDiseno.cshtml" />
+    <Content Include="Views\Admin\CatalogoServicio.cshtml" />
+    <Content Include="Views\Admin\Turnos.cshtml" />
+    <Content Include="Views\Cajera\ServiciosPagar.cshtml" />
+    <Content Include="Views\Manicurista\ServiciosAsignados.cshtml" />
+    <Content Include="Views\Manicurista\ServicioEnProceso.cshtml" />
+    <Content Include="Views\Manicurista\ModificarServicioEnProceso.cshtml" />
+    <Content Include="Views\Reserva\SolicitarReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

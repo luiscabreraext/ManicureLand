@@ -19,5 +19,35 @@ namespace ManicureLand.Controllers
             return View();
         }
 
+        public ActionResult CatalogoDiseno()
+        {
+            return View();
+        }
+
+        public ActionResult CatalogoServicio()
+        {
+            return View();
+        }
+
+        public ActionResult Empleado()
+        {
+            return View();
+        }
+
+        public ActionResult Panel()
+        {
+            return View();
+        }
+
+        public ActionResult Servicio()
+        {
+            return View();
+        }
+
+        public ActionResult Turnos()
+        {
+            return View();
+        }
+
     }
 }

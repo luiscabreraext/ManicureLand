@@ -84,7 +84,7 @@ CREATE TABLE [dbo].[Turno](
 	[idTurno] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[idManicurista] [int] NOT NULL,	
 	[fechaInico] [datetime] NOT NULL,
-	[fechatermino] [datetime] NOT NULL,
+	[fechaTermino] [datetime] NOT NULL,
 	[horaInicio] [time] NOT NULL,
 	[horaTermino] [time] NOT NULL,
 	[horaInicioColacion] [time] NOT NULL,
