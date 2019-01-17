@@ -29,7 +29,7 @@ namespace ManicureLand.Controllers
         public ActionResult MisDatos(Cliente cliente)
         {
             ClienteService clienteService = new ClienteService();
-            if (clienteService.ObtenerCliente(out cliente))
+            if (clienteService.ObtenerCliente(1, out cliente))
             {
                 return View(cliente);
             }

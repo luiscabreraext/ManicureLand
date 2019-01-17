@@ -18,14 +18,17 @@ namespace ManicureLand.Services
             conexion = new SqlConnection(STRING_CONECTION);
         }
 
-        public bool BuscarRegistro(string tabla, string filtro)
+        public SqlDataReader BuscarRegistro(string query)
         {
-            return true;
-        }
-
-        public bool BuscarListaRegistro(string tabla, string filtro)
-        {
-            return true;
+            SqlCommand command = new SqlCommand();
+            SqlDataReader sqlDataReader;
+            conexion.Open();
+            command.Connection = conexion;
+            
+            command.CommandType = CommandType.Text;
+            command.CommandText = query;
+            sqlDataReader = command.ExecuteReader();
+            return sqlDataReader;
         }
 
         public bool DeshabilitarRegistro(string tabla, string filtro)

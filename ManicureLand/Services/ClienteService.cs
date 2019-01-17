@@ -9,17 +9,25 @@ namespace ManicureLand.Services
 {
     public class ClienteService
     {
-        public bool ObtenerCliente(out Cliente cliente)
+        public bool ObtenerCliente(int idCliente, out Cliente cliente)
         {
             Cliente clienteEncontrado = new Cliente();
-            clienteEncontrado.IdCliente = 1;
-            clienteEncontrado.Nombres = "test";
-            clienteEncontrado.ApellidoPaterno = "test";
-            clienteEncontrado.ApellidoMaterno = "test";
-            clienteEncontrado.Correo = "test@test.cl";
-            clienteEncontrado.FechaNacimiento = DateTime.Parse("25-10-1984");
-            clienteEncontrado.FechaRegistro = DateTime.Parse("31-12-2018");
-            clienteEncontrado.Telefono = "+56987654321";
+            DBAccess dBAccess = new DBAccess();            
+            string query = "SELECT nombres, apellidoPaterno, apellidoMaterno, fechaNacimiento, correo, telefono, fechaRegistro, advertencias, estado FROM Cliente WHERE idCliente = " + idCliente.ToString();
+            SqlDataReader reader = dBAccess.BuscarRegistro(query);
+
+            while (reader.Read())
+            {
+                clienteEncontrado.IdCliente = int.Parse(reader["idCliente"].ToString());
+                clienteEncontrado.Nombres = reader["nombres"].ToString();
+                clienteEncontrado.ApellidoPaterno = reader["apellidoPaterno"].ToString();
+                clienteEncontrado.ApellidoMaterno = reader["apellidoMaterno"].ToString();
+                clienteEncontrado.Correo = reader["correo"].ToString();
+                clienteEncontrado.FechaNacimiento = DateTime.Parse(reader["fechaNacimiento"].ToString());
+                clienteEncontrado.FechaRegistro = DateTime.Parse(reader["fechaRegistro"].ToString());
+                clienteEncontrado.Telefono = reader["telefono"].ToString();
+            }
+
             cliente = clienteEncontrado;
             return true;
         }
