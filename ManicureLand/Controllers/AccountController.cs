@@ -21,9 +21,13 @@ namespace ManicureLand.Controllers
             ClienteService clienteService = new ClienteService();
             if (clienteService.AutenticarCliente(cliente))
             {
-                return View();
+                if (clienteService.ObtenerCliente(cliente.Correo, out cliente))
+                {
+                    Session.Add("Cliente", cliente);
+                }
+                return RedirectToAction("MisDatos", "Account");
             }
-                
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult FormularioRegistro()
@@ -33,9 +37,24 @@ namespace ManicureLand.Controllers
 
         public ActionResult MisDatos(Cliente cliente)
         {
-            ClienteService clienteService = new ClienteService();
-            if (clienteService.ObtenerCliente(1, out cliente))
+            if (cliente.IdCliente < 1 || cliente.Correo == null)
             {
+                if ((Cliente)Session["Cliente"] != null)
+                {
+                    cliente = (Cliente)Session["Cliente"];
+                }
+                else
+                {
+                    ViewBag.Message = "Error al recupoerar información de la cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                    return RedirectToAction("Index", "Home");
+                }
+                
+            }
+
+            ClienteService clienteService = new ClienteService();
+            if (clienteService.ObtenerCliente(cliente.IdCliente, out cliente))
+            {
+                ModelState.Clear();
                 return View(cliente);
             }
             else
@@ -60,18 +79,22 @@ namespace ManicureLand.Controllers
             }
         }
 
-        public ActionResult Modificar(Cliente cliente)
+        public ActionResult Modificar(Cliente cliente, string accion)
         {
-            ClienteService clienteService = new ClienteService();
-            if (clienteService.ModificarCliente(cliente))
+            if (accion.Equals("Modificar"))
             {
-                ViewBag.Message = "Datos modificados Exitosamente";
+                ClienteService clienteService = new ClienteService();
+                if (clienteService.ModificarCliente(cliente))
+                {
+                    ViewBag.Message = "Datos modificados Exitosamente";
+                }
+                else
+                {
+                    ViewBag.Message = "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                }
+                return RedirectToAction("MisDatos", "Account");
             }
-            else
-            {
-                ViewBag.Message = "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132";
-            }
-            return RedirectToAction("MisDatos", "Account");
+                return Deshabilitar(cliente);        
         }
 
         public ActionResult Deshabilitar(Cliente cliente)

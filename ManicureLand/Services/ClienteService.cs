@@ -15,7 +15,7 @@ namespace ManicureLand.Services
             {
                 Cliente clienteEncontrado = new Cliente();
                 DBAccess dBAccess = new DBAccess();
-                string query = "SELECT nombres, apellidoPaterno, apellidoMaterno, fechaNacimiento, correo, telefono, fechaRegistro, advertencias, estado FROM Cliente WHERE idCliente = " + idCliente.ToString();
+                string query = "SELECT nombres, apellidoPaterno, apellidoMaterno, fechaNacimiento, correo, telefono, fechaRegistro, advertencias, estado FROM Cliente WHERE idCliente = " + idCliente.ToString() + "  and estado = 1";
                 SqlDataReader reader = dBAccess.BuscarRegistro(query);
 
                 while (reader.Read())
@@ -40,8 +40,41 @@ namespace ManicureLand.Services
             
         }
 
+        public bool ObtenerCliente(string correo, out Cliente cliente)
+        {
+            try
+            {
+                Cliente clienteEncontrado = new Cliente();
+                DBAccess dBAccess = new DBAccess();
+                string query = "SELECT idCliente, nombres, apellidoPaterno, apellidoMaterno, fechaNacimiento, telefono, fechaRegistro, advertencias, estado FROM Cliente WHERE correo = '" + correo + "' and estado = 1";
+                SqlDataReader reader = dBAccess.BuscarRegistro(query);
+
+                while (reader.Read())
+                {
+                    clienteEncontrado.Correo = correo;
+                    clienteEncontrado.IdCliente = int.Parse(reader["idCliente"].ToString());
+                    clienteEncontrado.Nombres = reader["nombres"].ToString();
+                    clienteEncontrado.ApellidoPaterno = reader["apellidoPaterno"].ToString();
+                    clienteEncontrado.ApellidoMaterno = reader["apellidoMaterno"].ToString();
+                    clienteEncontrado.FechaNacimiento = DateTime.Parse(reader["fechaNacimiento"].ToString());
+                    clienteEncontrado.FechaRegistro = DateTime.Parse(reader["fechaRegistro"].ToString());
+                    clienteEncontrado.Telefono = reader["telefono"].ToString();
+                }
+
+                cliente = clienteEncontrado;
+                return true;
+            }
+            catch
+            {
+                cliente = null;
+                return false;
+            }
+
+        }
+
         public bool ModificarCliente(Cliente cliente)
         {
+
             DBAccess dBAccess = new DBAccess();
             string filtro = "idCliente = " + cliente.IdCliente.ToString();
             List<SqlParameter> listaParametros = new List<SqlParameter>
@@ -76,10 +109,6 @@ namespace ManicureLand.Services
             return listaCliente;
         }
 
-        public List<Cliente> ListarClientes() {
-            List<Cliente> listaClientes = new List<Cliente>();
-            return listaClientes;
-        }
 
         public Boolean RegistrarCliente(Cliente cliente) {
             DBAccess dBAccess = new DBAccess();
@@ -108,15 +137,18 @@ namespace ManicureLand.Services
         }
 
         public Boolean AutenticarCliente(Cliente cliente) {
-            return true;
-        }
+            DBAccess dBAccess = new DBAccess();
+            string query = "SELECT clave FROM Cliente WHERE correo = '" + cliente.Correo + "'  and estado = 1";
+            SqlDataReader reader = dBAccess.BuscarRegistro(query);
 
-        public Boolean DarBajaCliente(Cliente cliente) {
-            return true;
-        }
-
-        public Boolean ActualizarDatosCliente(Cliente cliente) {
-            return true;
+            while (reader.Read())
+            {
+                if (reader["clave"].ToString() == cliente.Clave)
+                {
+                    return true;
+                }
+            }
+                return false;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ManicureLand.Services
             try
             {
                 SqlCommand command = new SqlCommand();
-                String query = "UPDATE " + tabla + "SET estado = 0 where " + nombreId + " = " + id.ToString();
+                String query = "UPDATE " + tabla + " SET estado = 0 where " + nombreId + " = " + id.ToString() + " and estado = 1";
                 int numDatos;
                 conexion.Open();
                 command.Connection = conexion;
