@@ -31,9 +31,27 @@ namespace ManicureLand.Services
             return sqlDataReader;
         }
 
-        public bool DeshabilitarRegistro(string tabla, string filtro)
+        public bool DeshabilitarRegistro(string tabla, string nombreId, int id)
         {
-            return true;
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                String query = "UPDATE " + tabla + "SET estado = 0 where " + nombreId + " = " + id.ToString();
+                int numDatos;
+                conexion.Open();
+                command.Connection = conexion;
+                command.CommandType = CommandType.Text;
+                command.CommandText = query;
+                numDatos = command.ExecuteNonQuery();
+                if (numDatos < 1)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch {
+                return false;
+            }
         }
 
         public bool ModificarDatos(string tabla, List<SqlParameter> parametros, string filtro)
@@ -48,13 +66,12 @@ namespace ManicureLand.Services
                 bool respuesta = false;
                 int numDatos;
                 string query = "";
-                string paramX = "";
                 string param = "";
 
                 conexion.Open();
                 command.Connection = conexion;
 
-                query = "UPDATE " + tabla + "SET ";
+                query = "UPDATE " + tabla + " SET ";
                 for (int i = 0; i < parametros.Count; i++)
                 {
                     query = query + parametros[i].ParameterName;                    

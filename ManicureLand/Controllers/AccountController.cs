@@ -18,7 +18,12 @@ namespace ManicureLand.Controllers
 
         public ActionResult Ingresar(Cliente cliente)
         {
-            return View();
+            ClienteService clienteService = new ClienteService();
+            if (clienteService.AutenticarCliente(cliente))
+            {
+                return View();
+            }
+                
         }
 
         public ActionResult FormularioRegistro()
