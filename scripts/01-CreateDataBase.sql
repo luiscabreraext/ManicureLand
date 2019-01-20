@@ -37,7 +37,7 @@ GO
 
 CREATE TABLE [dbo].[Servicio](
 	[idServicio] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[descripcion] [varchar](32) NOT NULL,
+	[descripcion] [varchar](64) NOT NULL,
 	[tiempoEstimado] [int] NOT NULL,
 	[precio] [int] NOT NULL,
 	[observacion] [varchar](255) NULL,	
@@ -48,7 +48,7 @@ GO
 
 CREATE TABLE [dbo].[Diseno](
 	[idDiseno] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[descripcion] [varchar](32) NOT NULL,
+	[descripcion] [varchar](64) NOT NULL,
 	[tiempoEstimado] [int] NOT NULL,
 	[precio] [int] NOT NULL,
 	[observacion] [varchar](255) NULL,
@@ -66,9 +66,9 @@ CREATE TABLE [dbo].[Reserva](
 	[observacion] [varchar](255) NULL,
 	[fechaRegistroReserva] [datetime] NOT NULL,
 	[fechaReserva] [datetime] NOT NULL,
-	[horaLlegada] [time] NOT NULL,
-	[horaInicioServicio] [time] NOT NULL,
-	[horaTercminoServicio] [time] NOT NULL,
+	[horaLlegada] [time](0) NULL,
+	[horaInicioServicio] [time](0) NULL,
+	[horaTerminoServicio] [time](0) NULL,
 	[estado] [char](1) NOT NULL
 	)
 GO
@@ -85,10 +85,10 @@ CREATE TABLE [dbo].[Turno](
 	[idManicurista] [int] NOT NULL,	
 	[fechaInico] [datetime] NOT NULL,
 	[fechaTermino] [datetime] NOT NULL,
-	[horaInicio] [time] NOT NULL,
-	[horaTermino] [time] NOT NULL,
-	[horaInicioColacion] [time] NOT NULL,
-	[horaTerminoColacion] [time] NOT NULL
+	[horaInicio] [time](0) NOT NULL,
+	[horaTermino] [time](0) NOT NULL,
+	[horaInicioColacion] [time](0) NOT NULL,
+	[horaTerminoColacion] [time](0) NOT NULL
 	)
 GO
 
