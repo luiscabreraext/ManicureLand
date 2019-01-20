@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Panel Cliente";
+}
+
+<h2>Panel Cliente</h2>
+
+@using (Html.BeginForm("Panel", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="col-lg-12">
+    <div class="form-group col-md-6">
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Mis Datos" class="btn btn-primary col-sm-6" />
+        </div>
+
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Mis Reservas" class="btn btn-primary col-sm-6" />
+        </div>
+
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Reservar" class="btn btn-primary col-sm-6" />
+        </div>
+
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Cerrar Sesión" class="btn btn-info col-sm-6" />
+        </div>
+    </div>
+</div>
+}
+    @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

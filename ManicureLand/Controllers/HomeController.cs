@@ -10,6 +10,11 @@ namespace ManicureLand.Controllers
     {
         public ActionResult Index()
         {
+            if ((string)Session["Mensaje"] != null)
+            {
+                ViewBag.Message = (string)Session["Mensaje"];
+                Session.Remove("Mensaje");
+            }            
             return View();
         }
 

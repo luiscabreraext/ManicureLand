@@ -16,6 +16,15 @@ namespace ManicureLand.Controllers
             return View();
         }
 
+        public bool ValidarSesion()
+        {
+            if ((Cliente)Session["Cliente"] == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public ActionResult Ingresar(Cliente cliente)
         {
             ClienteService clienteService = new ClienteService();
@@ -25,8 +34,9 @@ namespace ManicureLand.Controllers
                 {
                     Session.Add("Cliente", cliente);
                 }
-                return RedirectToAction("MisDatos", "Account");
+                return PanelCliente();
             }
+            Session.Add("Mensaje", "Error al validar usuario o clave.");
             return RedirectToAction("Index", "Home");
         }
 
@@ -35,22 +45,82 @@ namespace ManicureLand.Controllers
             return View();
         }
 
-        public ActionResult MisDatos(Cliente cliente)
+        public ActionResult PanelCliente()
         {
-            if (cliente.IdCliente < 1 || cliente.Correo == null)
+            if (!ValidarSesion())
             {
-                if ((Cliente)Session["Cliente"] != null)
-                {
-                    cliente = (Cliente)Session["Cliente"];
-                }
-                else
-                {
-                    ViewBag.Message = "Error al recupoerar información de la cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
-                    return RedirectToAction("Index", "Home");
-                }
-                
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Index", "Home");
             }
+            return View("PanelCliente");
+        }
 
+        public ActionResult Panel(string accion)
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Index", "Home");
+            }
+            switch (accion) {
+                case "Mis Datos":
+                    return RedirectToAction("MisDatos", "Account");
+                case "Mis Reservas":
+                    return RedirectToAction("MisReservas", "Account");
+                case "Reservar":
+                    return RedirectToAction("FormularioReserva", "Account");
+                case "Cerrar Sesión":
+                    return CerrarSession();
+                default:
+                    return RedirectToAction("Index", "Home");
+
+            }
+        }
+
+        public ActionResult MisReservas()
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        public ActionResult FormularioReserva()
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        public ActionResult CerrarSession()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult MisDatos()
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Index", "Home");
+            }
+            Cliente cliente = new Cliente();
+            if ((Cliente)Session["Cliente"] != null)
+            {
+                cliente = (Cliente)Session["Cliente"];
+            }
+            else
+            {
+                ViewBag.Message = "Error al recupoerar información de la cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                return RedirectToAction("Index", "Home");
+            }
+                
             ClienteService clienteService = new ClienteService();
             if (clienteService.ObtenerCliente(cliente.IdCliente, out cliente))
             {

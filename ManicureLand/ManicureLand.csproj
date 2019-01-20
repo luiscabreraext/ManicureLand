@@ -213,7 +213,7 @@
     <Content Include="Views\Account\FormularioRegistro.cshtml" />
     <Content Include="Views\Account\MisDatos.cshtml" />
     <Content Include="Views\Admin\Diseno.cshtml" />
-    <Content Include="Views\Admin\Panel.cshtml" />
+    <Content Include="Views\Admin\PanelAdmin.cshtml" />
     <Content Include="Views\Admin\Empleado.cshtml" />
     <Content Include="Views\Admin\Servicio.cshtml" />
     <Content Include="Views\Admin\CatalogoDiseno.cshtml" />
@@ -224,6 +224,9 @@
     <Content Include="Views\Manicurista\ServicioEnProceso.cshtml" />
     <Content Include="Views\Manicurista\ModificarServicioEnProceso.cshtml" />
     <Content Include="Views\Reserva\SolicitarReserva.cshtml" />
+    <Content Include="Views\Account\PanelCliente.cshtml" />
+    <Content Include="Views\Account\MisReservas.cshtml" />
+    <Content Include="Views\Account\FormularioReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -34,7 +34,12 @@ namespace ManicureLand.Controllers
             return View();
         }
 
-        public ActionResult Panel()
+        public ActionResult Panel(string accion)
+        {
+            return View();
+        }
+
+        public ActionResult PanelAdmin()
         {
             return View();
         }
