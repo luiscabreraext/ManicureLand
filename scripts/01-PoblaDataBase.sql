@@ -1,9 +1,24 @@
 --- TABLA Dedo ---
-INSERT INTO dbo.Dedo (extremidad,descripci髇) VALUES ('MD','Dedo pulgar Mano DERECHA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MD','Dedo pulgar Mano DERECHA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MD','Dedo 铆ndice Mano DERECHA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MD','Dedo medio Mano DERECHA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MD','Dedo anular Mano DERECHA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MD','Dedo me帽ique Mano DERECHA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MI','Dedo pulgar Mano IZQUIERDA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MI','Dedo 铆ndice Mano IZQUIERDA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MI','Dedo medio Mano IZQUIERDA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MI','Dedo anular Mano IZQUIERDA');
+INSERT INTO dbo.Dedo (extremidad,descripci贸n) VALUES ('MI','Dedo me帽ique Mano IZQUIERDA');
 
 
 --- TABLA Cliente ---
 INSERT INTO dbo.Cliente (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,correo,clave,telefono,fechaRegistro,advertencias,estado) VALUES ('Juan Mario','Caceres','Mellado','01/01/2000','abc@abc.cl','abc123','+56987654321',getdate(),0,1);
+INSERT INTO dbo.Cliente (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,correo,clave,telefono,fechaRegistro,advertencias,estado) VALUES ('Teresa','Go帽i','Navarrete','18/03/1980','teresagn@correo.cl','clave123','+56967617748',getdate(),1,1);
+INSERT INTO dbo.Cliente (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,correo,clave,telefono,fechaRegistro,advertencias,estado) VALUES ('Loreley','Baca','Benavides','10/09/1985','loreleyb@rhyta.cl','oOhie0xei','+56922943670',getdate(),01,1);
+INSERT INTO dbo.Cliente (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,correo,clave,telefono,fechaRegistro,advertencias,estado) VALUES ('Gillermina','Mascarenas','Paz','18/03/1980','guillemasca@correo.cl','gie3puV3','+56915707692',getdate(),0,1);
+INSERT INTO dbo.Cliente (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,correo,clave,telefono,fechaRegistro,advertencias,estado) VALUES ('Fulgencio','Hern谩dez','Mercado','19/11/1993','fmercado@correo.cl','oow8Eesai','+56979512327',getdate(),0,1);
+INSERT INTO dbo.Cliente (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,correo,clave,telefono,fechaRegistro,advertencias,estado) VALUES ('Vulpiano','Guill茅n','Sosa','13/05/1989','vulpix@correo.cl','Riek3aexi0','+56914038159',getdate(),2,1);
+INSERT INTO dbo.Cliente (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,correo,clave,telefono,fechaRegistro,advertencias,estado) VALUES ('Maku','Ruvalcaba','Menchaca','11/03/1980','makuruvmen@correo.cl','chaizay9J','+56959250823',getdate(),0,1);
 
 
 --- TABLA Diseno ---
@@ -11,12 +26,14 @@ INSERT INTO dbo.Diseno (descripcion,tiempoEstimado,precio,observacion,urlDiseno,
 
 
 --- TABLA Empleado ---
-INSERT INTO dbo.Empleado (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,rut,correo,clave,telefono,fechaRegistro,perfil,estado) VALUES ('Pedro Pablo','Aranguiz','Ortiz','01/01/2000','1-9','abc@abc.cl','abc123','+56987654321',getdate(),1,1);
-INSERT INTO dbo.Empleado (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,rut,correo,clave,telefono,fechaRegistro,perfil,estado) VALUES ('Maria Mirella','Ponce','Casas','01/01/2000','1-9','abcdef@abc.cl','abc123','+56987654321',getdate(),2,1);
+INSERT INTO dbo.Empleado (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,rut,correo,clave,telefono,fechaRegistro,perfil,estado) VALUES ('Pedro Pablo','Aranguiz','Ortiz','01/01/2095','18349237-3','abc@abc.cl','abc123','+56987654321',getdate(),1,1);
+INSERT INTO dbo.Empleado (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,rut,correo,clave,telefono,fechaRegistro,perfil,estado) VALUES ('Maria Mirella','Ponce','Casas','14/05/1984','13487398-1','abcdef@abc.cl','abc123','+56987654321',getdate(),2,1);
+INSERT INTO dbo.Empleado (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,rut,correo,clave,telefono,fechaRegistro,perfil,estado) VALUES ('Ramona Ahre','Rivera','Zamudio','01/01/2000','23949819-1','ramri@correo.cl','beehei3Xie','+56985990224',getdate(),2,1);
+INSERT INTO dbo.Empleado (nombres,apellidoPaterno,apellidoMaterno,fechaNacimiento,rut,correo,clave,telefono,fechaRegistro,perfil,estado) VALUES ('Ana Aureo','Varela','Jurado','27/02/1991','21430082-6','anitavarelaj@correo.cl','noa7Hee1','+56989323824',getdate(),2,1);
 
 
 --- TABLA Servicio ---
-INSERT INTO dbo.Servicio (descripcion,tiempoEstimado,precio,observacion,codigoColor,estado) VALUES ('Esmalte satinado egipcio',8,5000,'Esmalte de lujo con secado r醦ido','aa09cf',1);
+INSERT INTO dbo.Servicio (descripcion,tiempoEstimado,precio,observacion,codigoColor,estado) VALUES ('Esmalte satinado egipcio',8,5000,'Esmalte de lujo con secado r谩pido','aa09cf',1);
 
 
 --- TABLA CatalogoDiseno ---
