@@ -31,5 +31,10 @@ namespace ManicureLand.Controllers
 
             return View();
         }
+
+        public ActionResult Intranet()
+        {
+            return View();
+        }
     }
 }

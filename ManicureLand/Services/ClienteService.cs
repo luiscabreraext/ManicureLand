@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace ManicureLand.Services
@@ -89,11 +91,29 @@ namespace ManicureLand.Services
             
             if (cliente.Clave != null && cliente.Clave != "")
             {
-                listaParametros.Add(new SqlParameter("clave", cliente.Clave));
+                using (MD5 md5Hash = MD5.Create())
+                {
+                    cliente.Clave = GetMd5Hash(md5Hash, cliente.Clave);
+                    listaParametros.Add(new SqlParameter("clave", cliente.Clave));
+                }
             }
 
             return dBAccess.ModificarDatos("Cliente", listaParametros, filtro);
 
+        }
+
+        private string GetMd5Hash(MD5 md5Hash, string clave)
+        {
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(clave));
+
+            StringBuilder sBuilder = new StringBuilder();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            return sBuilder.ToString();
         }
 
         public bool DeshabilitarCliente(Cliente cliente)
@@ -119,12 +139,18 @@ namespace ManicureLand.Services
                 new SqlParameter("apellidoMaterno", cliente.ApellidoMaterno),
                 new SqlParameter("fechaNacimiento", cliente.FechaNacimiento),
                 new SqlParameter("correo", cliente.Correo),
-                new SqlParameter("clave", cliente.Clave),
+                //new SqlParameter("clave", cliente.Clave),
                 new SqlParameter("telefono", cliente.Telefono),
                 new SqlParameter("fechaRegistro", DateTime.Now),
                 new SqlParameter("advertencias", int.Parse("0")),
                 new SqlParameter("estado", (bool)true)
             };
+
+            using (MD5 md5Hash = MD5.Create())
+            {
+                cliente.Clave = GetMd5Hash(md5Hash, cliente.Clave);
+                parametros.Add(new SqlParameter("clave", cliente.Clave));
+            }
 
             if (dBAccess.InsertarDatos("Cliente",parametros))
             {
@@ -141,13 +167,20 @@ namespace ManicureLand.Services
             string query = "SELECT clave FROM Cliente WHERE correo = '" + cliente.Correo + "'  and estado = 1";
             SqlDataReader reader = dBAccess.BuscarRegistro(query);
 
-            while (reader.Read())
+            using (MD5 md5Hash = MD5.Create())
             {
-                if (reader["clave"].ToString() == cliente.Clave)
+
+                while (reader.Read())
                 {
-                    return true;
+
+                    if (reader["clave"].ToString() == GetMd5Hash(md5Hash, cliente.Clave))
+                    {
+                        return true;
+                    }
                 }
             }
+
+            
                 return false;
         }
     }

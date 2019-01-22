@@ -11,7 +11,7 @@ namespace ManicureLand.Models
         public string Nombres { get; set; }
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
-        public string FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
         public string Rut { get; set; }
         public string Correo { get; set; }
         public string Clave { get; set; }
@@ -26,7 +26,7 @@ namespace ManicureLand.Models
 
         }
 
-        public Empleado(int idEmpleado, string nombres, string apellidoPaterno, string apellidoMaterno, string fechaNacimiento, string rut, string correo, string clave, string repetirClave, string telefono, DateTime fechaRegistro, int perfil, bool estado)
+        public Empleado(int idEmpleado, string nombres, string apellidoPaterno, string apellidoMaterno, DateTime fechaNacimiento, string rut, string correo, string clave, string repetirClave, string telefono, DateTime fechaRegistro, int perfil, bool estado)
         {
             IdEmpleado = idEmpleado;
             Nombres = nombres;
