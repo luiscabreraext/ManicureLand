@@ -129,11 +129,42 @@ namespace ManicureLand.Services
 
         }
 
-        public List<Empleado> BuscarEmpleado(string nombreCampo, string valorCampo)
+        public bool ListarEmpleados(out List<Empleado> listaEmpleados)
         {
-            List<Empleado> listaEmpleado = new List<Empleado>();
-            //sqldatareader
-            return listaEmpleado;
+            
+            try
+            {
+                List<Empleado> listaEmpleadoEncontrados = new List<Empleado>();
+                
+                DBAccess dBAccess = new DBAccess();
+                string query = "SELECT idEmpleado, nombres, apellidoPaterno, apellidoMaterno, rut, correo, fechaNacimiento, telefono, fechaRegistro, perfil, estado FROM Empleado";
+                SqlDataReader reader = dBAccess.BuscarRegistro(query);
+
+                while (reader.Read())
+                {
+                    Empleado empleado = new Empleado();
+                    empleado.IdEmpleado = int.Parse(reader["idEmpleado"].ToString());
+                    empleado.Nombres = reader["nombres"].ToString();
+                    empleado.ApellidoPaterno = reader["apellidoPaterno"].ToString();
+                    empleado.ApellidoMaterno = reader["apellidoMaterno"].ToString();
+                    empleado.Rut = reader["rut"].ToString();
+                    empleado.Correo = reader["correo"].ToString();
+                    empleado.FechaNacimiento = DateTime.Parse(reader["fechaNacimiento"].ToString());
+                    empleado.FechaRegistro = DateTime.Parse(reader["fechaRegistro"].ToString());
+                    empleado.Telefono = reader["telefono"].ToString();
+                    empleado.Perfil = int.Parse(reader["perfil"].ToString());
+                    empleado.Estado = bool.Parse(reader["estado"].ToString());
+                    listaEmpleadoEncontrados.Add(empleado);
+                }                
+                listaEmpleados = listaEmpleadoEncontrados;
+                return true;
+            }
+            catch
+            {
+                listaEmpleados = null;
+                return false;
+            }
+            
         }
 
 

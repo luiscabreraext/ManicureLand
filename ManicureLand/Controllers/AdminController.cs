@@ -70,14 +70,47 @@ namespace ManicureLand.Controllers
             return View();
         }
 
-        public ActionResult Empleado()
+        public ActionResult Empleado(int idEmpleado)
         {
             if (!ValidarSesion())
             {
                 Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
                 return RedirectToAction("Intranet", "Home");
             }
-            return View();
+
+            EmpleadoService empleadoService = new EmpleadoService();
+
+            Empleado empleado = new Empleado();
+
+            if (empleadoService.ObtenerEmpleado(idEmpleado, out empleado))
+            {
+                return View(empleado);
+            }
+            Session.Add("Mensaje", "Error la mostrar información del empleado seleccionado");
+            return RedirectToAction("Empleados", "Admin");
+
+        }
+
+        public ActionResult Empleados()
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Intranet", "Home");
+            }
+
+            EmpleadoService empleadoService = new EmpleadoService();
+
+            List<Empleado> listaEmpleados = new List<Empleado>();
+
+            if (empleadoService.ListarEmpleados(out listaEmpleados))
+            {
+                //Session.Add("listaEmpleados", listaEmpleados);
+                //return RedirectToAction("Empleados", "Admin");
+                return View(listaEmpleados);
+            }
+            Session.Add("Mensaje", "Error la mostrar información de los empleados");
+            return RedirectToAction("PanelAdmin", "Admin");
         }
 
         public ActionResult Atenciones()
@@ -100,7 +133,7 @@ namespace ManicureLand.Controllers
             switch (accion)
             {
                 case "Empleados":
-                    return RedirectToAction("Empleado", "Admin");
+                    return RedirectToAction("Empleados", "Admin");
                 case "Servicios":
                     return RedirectToAction("Servicio", "Admin");
                 case "Diseños":

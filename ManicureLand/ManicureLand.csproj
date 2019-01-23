@@ -230,6 +230,7 @@
     <Content Include="Views\Account\FormularioReserva.cshtml" />
     <Content Include="Views\Home\Intranet.cshtml" />
     <Content Include="Views\Admin\Atenciones.cshtml" />
+    <Content Include="Views\Admin\Empleados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
