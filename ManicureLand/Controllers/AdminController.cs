@@ -74,18 +74,24 @@ namespace ManicureLand.Controllers
         {
             if (!ValidarSesion())
             {
-                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");                
                 return RedirectToAction("Intranet", "Home");
             }
-
+            if (idEmpleado == 0)
+            {
+                ViewBag.boton = "Guardar";
+                return View();
+            }
             EmpleadoService empleadoService = new EmpleadoService();
 
             Empleado empleado = new Empleado();
 
             if (empleadoService.ObtenerEmpleado(idEmpleado, out empleado))
             {
+                ViewBag.boton = "Modificar";
                 return View(empleado);
             }
+            
             Session.Add("Mensaje", "Error la mostrar información del empleado seleccionado");
             return RedirectToAction("Empleados", "Admin");
 
@@ -111,6 +117,38 @@ namespace ManicureLand.Controllers
             }
             Session.Add("Mensaje", "Error la mostrar información de los empleados");
             return RedirectToAction("PanelAdmin", "Admin");
+        }
+
+        public ActionResult Modificar(Empleado empleado, string accion)
+        {
+            if (accion.Equals("Modificar"))
+            {
+                EmpleadoService empleadoService = new EmpleadoService();
+                if (empleadoService.ModificarEmpleado(empleado))
+                {
+                    ViewBag.Message = "Datos modificados Exitosamente";
+                }
+                else
+                {
+                    ViewBag.Message = "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                }
+                return RedirectToAction("MisDatos", "Account");
+            }
+            return Guardar(empleado);
+        }
+
+        public ActionResult Guardar(Empleado empleado)
+        {
+            EmpleadoService empleadoService = new EmpleadoService();
+            if (empleadoService.RegistrarEmpleado(empleado))
+            {
+                ViewBag.Message = "Datos registrados Exitosamente";
+            }
+            else
+            {
+                ViewBag.Message = "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132";
+            }
+            return RedirectToAction("Empleados", "Admin");
         }
 
         public ActionResult Atenciones()
@@ -168,6 +206,17 @@ namespace ManicureLand.Controllers
                 return RedirectToAction("Intranet", "Home");
             }
             return View("PanelAdmin");
+        }
+
+        public ActionResult NuevoEmpleado()
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Intranet", "Home");
+            }
+            ViewBag.boton = "Guardar";
+            return View("Empleado");
         }
 
         public ActionResult Servicio()

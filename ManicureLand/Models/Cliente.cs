@@ -44,7 +44,7 @@ namespace ManicureLand.Models
 
         [RegularExpression(@"^[a-zA-Z0-9]{1}[a-zA-Z0-9!@#\$\*&]{3,31}$",
                   ErrorMessage = "Su contraseña debe empezar por una letra seguida de números, letras o los simbolos !, @, #, $, &, o * con un mínimo de 4 caracteres y máximo 32.")]
-                public string RepetirClave { get; set; }
+        public string RepetirClave { get; set; }
 
         [RegularExpression(@"^[\+]{1}[0-9]{11}$",
                    ErrorMessage = "Formato incorrecto de telefono, use +56212345678.")]

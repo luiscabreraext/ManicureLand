@@ -32,6 +32,7 @@ namespace ManicureLand.Services
                     empleadoEncontrado.FechaRegistro = DateTime.Parse(reader["fechaRegistro"].ToString());
                     empleadoEncontrado.Telefono = reader["telefono"].ToString();
                     empleadoEncontrado.Perfil = int.Parse(reader["perfil"].ToString());
+                    empleadoEncontrado.Estado = bool.Parse(reader["estado"].ToString());
                 }
 
                 empleado = empleadoEncontrado;

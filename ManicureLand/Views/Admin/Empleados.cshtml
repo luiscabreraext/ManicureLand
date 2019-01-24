@@ -7,7 +7,11 @@
 <h2>Empleados</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <div class="form-group">
+        <div class="col-md-6 center-block">
+            <input class="btn-success btn-sm col-md-12" type="button" value="Nuevo Empleado" onclick="location.href='@Url.Action("NuevoEmpleado", "Admin")'" />
+        </div>
+    </div>
 </p>
 <table class="table">
     <tr>
@@ -21,9 +25,6 @@
             @Html.DisplayNameFor(model => model.ApellidoMaterno)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaNacimiento)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Rut)
         </th>
         <th>
@@ -32,16 +33,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Telefono)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Perfil)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -56,9 +47,6 @@
             @Html.DisplayFor(modelItem => item.ApellidoMaterno)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FechaNacimiento)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Rut)
         </td>
         <td>
@@ -68,16 +56,7 @@
             @Html.DisplayFor(modelItem => item.Telefono)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FechaRegistro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Perfil)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.ActionLink("Empleado", "Empleado", new { item.IdEmpleado }) |            
+            @Html.ActionLink("Ver/Modificar", "Empleado", new { item.IdEmpleado }, new { @class = "btn btn-primary" })
         </td>
     </tr>
 }
