@@ -36,16 +36,6 @@ namespace ManicureLand.Controllers
             return RedirectToAction("Intranet", "Home");
         }
 
-        public ActionResult Diseno()
-        {
-            if (!ValidarSesion())
-            {
-                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
-                return RedirectToAction("Intranet", "Home");
-            }
-            return View();
-        }
-
         public ActionResult CatalogoDiseno()
         {
             if (!ValidarSesion())
@@ -91,6 +81,36 @@ namespace ManicureLand.Controllers
 
             Session.Add("Mensaje", "Error la mostrar información del servicio seleccionado");
             return RedirectToAction("Servicios", "Admin");
+
+        }
+
+        public ActionResult Diseno(int idDiseno)
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Intranet", "Home");
+            }
+
+            if (idDiseno == 0)
+            {
+                ViewBag.boton = "Guardar";
+                return View();
+            }
+            DisenoService disenoService = new DisenoService();
+
+            Diseno diseno = new Diseno();
+
+            if (disenoService.ObtenerDiseno(idDiseno, out diseno))
+            {
+                ModelState.Clear();
+                ViewBag.boton = "Modificar";
+                ViewBag.imagen = diseno.UrlDiseno;
+                return View(diseno);
+            }
+
+            Session.Add("Mensaje", "Error la mostrar información del diseno seleccionado");
+            return RedirectToAction("Disenos", "Admin");
 
         }
 
@@ -164,6 +184,27 @@ namespace ManicureLand.Controllers
             return RedirectToAction("PanelAdmin", "Admin");
         }
 
+        public ActionResult Disenos()
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Intranet", "Home");
+            }
+
+            DisenoService disenoService = new DisenoService();
+
+            List<Diseno> listaDisenos = new List<Diseno>();
+
+            if (disenoService.ListarDisenos(out listaDisenos))
+            {
+                ViewBag.Message = (string)Session["Mensaje"];
+                return View(listaDisenos);
+            }
+            Session.Add("Mensaje", "Error la mostrar información de los diseños");
+            return RedirectToAction("PanelAdmin", "Admin");
+        }
+
         public ActionResult Modificar(Empleado empleado, string accion)
         {
             if (accion.Equals("Modificar"))
@@ -193,11 +234,33 @@ namespace ManicureLand.Controllers
                 }
                 else
                 {
-                    Session.Add("Mensaje", "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132");
+                    Session.Add("Mensaje", "Error al modificar los datos, favor reintente más tarde o contáctese al +56 9 8554 7132");
                 }
                 return RedirectToAction("Servicios", "Admin");
             }
             return GuardarServicio(servicio);
+        }
+
+        public ActionResult ModificarDiseno(Diseno diseno, string accion)
+        {
+            if (accion.Equals("Modificar"))
+            {
+                DisenoService disenoService = new DisenoService();
+                if (disenoService.ModificarDiseno(diseno))
+                {
+                    Session.Add("Mensaje", "Datos modificados Exitosamente");
+                }
+                else
+                {
+                    Session.Add("Mensaje", "Error al modificar los datos, favor reintente más tarde o contáctese al +56 9 8554 7132");
+                }
+                return RedirectToAction("Disenos", "Admin");
+            }
+            if (accion.Equals(null))
+            {
+
+            }
+                return GuardarDiseno(diseno);
         }
 
         public ActionResult Guardar(Empleado empleado)
@@ -223,9 +286,23 @@ namespace ManicureLand.Controllers
             }
             else
             {
-                Session.Add("Mensaje", "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132");
+                Session.Add("Mensaje", "Error al guardar los datos, favor reintente más tarde o contáctese al +56 9 8554 7132");
             }
             return RedirectToAction("Servicios", "Admin");
+        }
+
+        public ActionResult GuardarDiseno(Diseno diseno)
+        {
+            DisenoService disenoService = new DisenoService();
+            if (disenoService.RegistrarDiseno(diseno))
+            {
+                Session.Add("Mensaje", "Datos registrados Exitosamente");
+            }
+            else
+            {
+                Session.Add("Mensaje", "Error al Guardar los datos, favor reintente más tarde o contáctese al +56 9 8554 7132");
+            }
+            return RedirectToAction("Disenos", "Admin");
         }
 
         public ActionResult Atenciones()
@@ -252,7 +329,7 @@ namespace ManicureLand.Controllers
                 case "Servicios":
                     return RedirectToAction("Servicios", "Admin");
                 case "Diseños":
-                    return RedirectToAction("Diseno", "Admin");
+                    return RedirectToAction("Disenos", "Admin");
                 case "Turnos":
                     return RedirectToAction("Turnos", "Admin");
                 case "Catalogo de Diseños":
@@ -308,7 +385,16 @@ namespace ManicureLand.Controllers
             return View("Servicio");
         }
 
-        
+        public ActionResult NuevoDiseno()
+        {
+            if (!ValidarSesion())
+            {
+                Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
+                return RedirectToAction("Intranet", "Home");
+            }
+            ViewBag.boton = "Guardar";
+            return View("Diseno");
+        }
 
         public ActionResult Turnos()
         {

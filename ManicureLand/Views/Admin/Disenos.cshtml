@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ManicureLand.Models.Diseno>
+
+@{
+    ViewBag.Title = "Disenos";
+}
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var divMensaje = document.getElementById("messageModal");
+        var mensaje = '@ViewBag.Message';
+
+        if (mensaje.length > 1) {
+            divMensaje.style.display = "block";
+            divMensaje.classList.add("alert");
+            divMensaje.classList.add("alert-warning");
+            setTimeout(function () {
+                divMensaje.style.display = "none";
+            }, 3000);
+        }
+    }, false);
+</script>
+
+<h2>Disenos</h2>
+
+<p>
+    <div class="form-group">
+        <div class="col-md-6 center-block">
+            <input class="btn-success btn-sm col-md-12" type="button" value="Nuevo Empleado" onclick="location.href='@Url.Action("NuevoDiseno", "Admin")'" />
+        </div>
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdDiseno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiempoEstimado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>        
+        <th>
+            Acción
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDiseno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TiempoEstimado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.ActionLink("Ver/Modificar", "Diseno", new { item.IdDiseno }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <a href="javascript:void(0);" onclick="history.go(-1);"><input type="button" value="Volver" class="btn btn-success" /></a>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-12 center-block" id="messageModal" style="display:none">
+        <p align="center">@ViewBag.Message</p>
+    </div>
+</div>

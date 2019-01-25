@@ -170,6 +170,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\DBAccess.cs" />
+    <Compile Include="Services\DisenoService.cs" />
     <Compile Include="Services\EmpleadoService.cs" />
     <Compile Include="Services\ServicioService.cs" />
   </ItemGroup>
@@ -182,6 +183,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\disenos\foto1.png" />
+    <Content Include="img\disenos\foto2.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -233,6 +236,7 @@
     <Content Include="Views\Admin\Atenciones.cshtml" />
     <Content Include="Views\Admin\Empleados.cshtml" />
     <Content Include="Views\Admin\Servicios.cshtml" />
+    <Content Include="Views\Admin\Disenos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

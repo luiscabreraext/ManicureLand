@@ -13,7 +13,7 @@ namespace ManicureLand.Models
 
         [DisplayName("Descripción")]
         [StringLength(64), Required(ErrorMessage = "Campo Requerido")]
-        [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
+        [RegularExpression(@"^[0-9a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string Descripcion { get; set; }
 
         [DisplayName("Minutos Estimados")]
@@ -24,7 +24,7 @@ namespace ManicureLand.Models
 
         [DisplayName("Observación")]
         [StringLength(255)]
-        [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
+        [RegularExpression(@"^[0-9a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string Observacion { get; set; }
 
         [DisplayName("Código Color")]
