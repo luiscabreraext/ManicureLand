@@ -6,19 +6,16 @@
 
 <h2>Servicio</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("ModificarServicio", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
-    <h4>Servicio</h4>
-    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <div class="form-group">
-        @Html.LabelFor(model => model.IdServicio, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.IdServicio, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.IdServicio, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.IdServicio, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
 
@@ -57,8 +54,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CodigoColor, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CodigoColor, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CodigoColor, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.CodigoColor, new { htmlAttributes = new { @class = "form-control", @type = "color" } })
         </div>
     </div>
 
@@ -74,7 +70,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" name="accion" value="@ViewBag.boton" class="btn btn-primary" />
         </div>
     </div>
 
@@ -86,6 +82,6 @@
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

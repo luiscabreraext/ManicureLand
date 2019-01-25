@@ -171,6 +171,7 @@
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\DBAccess.cs" />
     <Compile Include="Services\EmpleadoService.cs" />
+    <Compile Include="Services\ServicioService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -231,6 +232,7 @@
     <Content Include="Views\Home\Intranet.cshtml" />
     <Content Include="Views\Admin\Atenciones.cshtml" />
     <Content Include="Views\Admin\Empleados.cshtml" />
+    <Content Include="Views\Admin\Servicios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
