@@ -6,23 +6,6 @@
 <h2>Intranet</h2>
 
 <script type="text/javascript">
-    var data = { "usuario": "usuario", "clave": "clave" };
-
-    function Ingresar() {
-        $.ajax({
-            url: "/Account/Ingresar",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function (data) {
-
-            },
-            error: function (xhr) {
-                console.log(xhr);
-            }
-        });
-    };
-
     document.addEventListener('DOMContentLoaded', function () {
         var divMensaje = document.getElementById("messageModal");
         var mensaje = '@ViewBag.Message';

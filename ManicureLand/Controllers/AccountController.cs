@@ -110,6 +110,7 @@ namespace ManicureLand.Controllers
                 Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
                 return RedirectToAction("Index", "Home");
             }
+
             Cliente cliente = new Cliente();
             if ((Cliente)Session["Cliente"] != null)
             {
@@ -117,7 +118,7 @@ namespace ManicureLand.Controllers
             }
             else
             {
-                ViewBag.Message = "Error al recupoerar información de la cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                Session.Add("Mensaje", "Error al recupoerar información de la cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132");
                 return RedirectToAction("Index", "Home");
             }
                 
@@ -125,11 +126,12 @@ namespace ManicureLand.Controllers
             if (clienteService.ObtenerCliente(cliente.IdCliente, out cliente))
             {
                 ModelState.Clear();
+                ViewBag.Message = (string)Session["Mensaje"];
                 return View(cliente);
             }
             else
             {
-                ViewBag.Message = "Error al recupoerar información de la cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                Session.Add("Mensaje","Error al recupoerar información de la cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132");
                 return RedirectToAction("Index", "Home");
             }            
         }
@@ -139,12 +141,12 @@ namespace ManicureLand.Controllers
             ClienteService clienteService = new ClienteService();
             if (clienteService.RegistrarCliente(cliente))
             {
-                ViewBag.Message = "Cuenta Registrada";
+                Session.Add("Mensaje", "Cuenta Registrada");
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.Message = "Error al registrar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                Session.Add("Message", "Error al registrar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132");
                 return RedirectToAction("FormularioRegistro", "Account");
             }
         }
@@ -156,11 +158,11 @@ namespace ManicureLand.Controllers
                 ClienteService clienteService = new ClienteService();
                 if (clienteService.ModificarCliente(cliente))
                 {
-                    ViewBag.Message = "Datos modificados Exitosamente";
+                    Session.Add("Mensaje", "Datos modificados Exitosamente");
                 }
                 else
                 {
-                    ViewBag.Message = "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                    Session.Add("Mensaje", "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132");
                 }
                 return RedirectToAction("MisDatos", "Account");
             }
@@ -172,12 +174,12 @@ namespace ManicureLand.Controllers
             ClienteService clienteService = new ClienteService();
             if (clienteService.DeshabilitarCliente(cliente))
             {
-                ViewBag.Message = "Cuenta deshabilitada exitosamente";
+                Session.Add("Mensaje", "Cuenta deshabilitada exitosamente");
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.Message = "Error al deshabilitar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                Session.Add("Mensaje", "Error al deshabilitar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132");
                 return RedirectToAction("MisDatos", "Account");
             }
         }

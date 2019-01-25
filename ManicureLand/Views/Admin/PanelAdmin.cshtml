@@ -2,46 +2,69 @@
     ViewBag.Title = "Panel de Administracion";
 }
 
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var divMensaje = document.getElementById("messageModal");
+        var mensaje = '@ViewBag.Message';
+
+        if (mensaje.length > 1) {
+            divMensaje.style.display = "block";
+            divMensaje.classList.add("alert");
+            divMensaje.classList.add("alert-warning");
+            setTimeout(function () {
+                divMensaje.style.display = "none";
+            }, 3000);
+        }
+    }, false);
+</script>
+
 <h2>Panel Cliente</h2>
 
 @using (Html.BeginForm("Panel", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="col-lg-12">
-        <div class="form-group col-md-6">
-            <div class="col-md-6">
-                <input type="submit" name="accion" value="Empleados" class="btn btn-primary col-sm-6" />
-            </div>
+<div class="col-lg-12">
+    <div class="form-group col-md-6">
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Empleados" class="btn btn-primary col-sm-6" />
+        </div>
 
-            <div class="col-md-6">
-                <input type="submit" name="accion" value="Servicios" class="btn btn-primary col-sm-6" />
-            </div>
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Servicios" class="btn btn-primary col-sm-6" />
+        </div>
 
-            <div class="col-md-6">
-                <input type="submit" name="accion" value="Diseños" class="btn btn-primary col-sm-6" />
-            </div>
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Diseños" class="btn btn-primary col-sm-6" />
+        </div>
 
-            <div class="col-md-6">
-                <input type="submit" name="accion" value="Turnos" class="btn btn-primary col-sm-6" />
-            </div>
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Turnos" class="btn btn-primary col-sm-6" />
+        </div>
 
-            <div class="col-md-6">
-                <input type="submit" name="accion" value="Catalogo de Diseños" class="btn btn-primary col-sm-6" />
-            </div>
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Catalogo de Diseños" class="btn btn-primary col-sm-6" />
+        </div>
 
-            <div class="col-md-6">
-                <input type="submit" name="accion" value="Catalogo de Servicios" class="btn btn-primary col-sm-6" />
-            </div>
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Catalogo de Servicios" class="btn btn-primary col-sm-6" />
+        </div>
 
-            <div class="col-md-6">
-                <input type="submit" name="accion" value="Atenciones" class="btn btn-primary col-sm-6" />
-            </div>
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Atenciones" class="btn btn-primary col-sm-6" />
+        </div>
 
-            <div class="col-md-6">
-                <input type="submit" name="accion" value="Cerrar Sesión" class="btn btn-info col-sm-6" />
-            </div>
+        <div class="col-md-6">
+            <input type="submit" name="accion" value="Cerrar Sesión" class="btn btn-info col-sm-6" />
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-12 center-block" id="messageModal" style="display:none">
+            <p align="center">@ViewBag.Message</p>
+        </div>
+    </div>
+
+</div>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

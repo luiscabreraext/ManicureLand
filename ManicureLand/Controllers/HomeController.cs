@@ -34,6 +34,7 @@ namespace ManicureLand.Controllers
 
         public ActionResult Intranet()
         {
+            ViewBag.Message = (string)Session["Mensaje"];
             return View();
         }
     }

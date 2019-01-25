@@ -26,6 +26,7 @@ namespace ManicureLand.Models
         [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string ApellidoMaterno { get; set; }
 
+        [DisplayName("Fecha Nacimiento")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Debe indicar la fecha correcta")]
@@ -49,7 +50,8 @@ namespace ManicureLand.Models
         [RegularExpression(@"^[\+]{1}[0-9]{11}$",
                    ErrorMessage = "Formato incorrecto de telefono, use +56212345678.")]
         public string Telefono { get; set; }
-        
+
+        [DisplayName("Fecha Registro")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaRegistro { get; set; }

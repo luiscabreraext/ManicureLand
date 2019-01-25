@@ -28,7 +28,7 @@ namespace ManicureLand.Models
 
         [DisplayName("Fecha Nacimiento")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Debe indicar la fecha correcta")]
         public DateTime FechaNacimiento { get; set; }
 
@@ -58,7 +58,7 @@ namespace ManicureLand.Models
 
         [DisplayName("Fecha Nacimiento")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaRegistro { get; set; }
 
         public int Perfil { get; set; }

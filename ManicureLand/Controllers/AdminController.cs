@@ -10,12 +10,6 @@ namespace ManicureLand.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public bool ValidarSesion()
         {
             if ((Empleado)Session["Empleado"] == null)
@@ -34,6 +28,7 @@ namespace ManicureLand.Controllers
                 {
                     Session.Add("Empleado", empleado);
                 }
+                Session["Mensaje"] = null;
                 return PanelAdmin();
             }
             Session.Add("Mensaje", "Error al validar usuario o clave.");
@@ -88,6 +83,7 @@ namespace ManicureLand.Controllers
 
             if (empleadoService.ObtenerEmpleado(idEmpleado, out empleado))
             {
+                ModelState.Clear();
                 ViewBag.boton = "Modificar";
                 return View(empleado);
             }
@@ -111,8 +107,7 @@ namespace ManicureLand.Controllers
 
             if (empleadoService.ListarEmpleados(out listaEmpleados))
             {
-                //Session.Add("listaEmpleados", listaEmpleados);
-                //return RedirectToAction("Empleados", "Admin");
+                ViewBag.Message = (string)Session["Mensaje"];
                 return View(listaEmpleados);
             }
             Session.Add("Mensaje", "Error la mostrar información de los empleados");
@@ -126,13 +121,13 @@ namespace ManicureLand.Controllers
                 EmpleadoService empleadoService = new EmpleadoService();
                 if (empleadoService.ModificarEmpleado(empleado))
                 {
-                    ViewBag.Message = "Datos modificados Exitosamente";
+                    Session.Add("Mensaje", "Datos modificados Exitosamente");
                 }
                 else
                 {
-                    ViewBag.Message = "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                    Session.Add("Mensaje", "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132");
                 }
-                return RedirectToAction("MisDatos", "Account");
+                return RedirectToAction("Empleados", "Admin");
             }
             return Guardar(empleado);
         }
@@ -142,11 +137,11 @@ namespace ManicureLand.Controllers
             EmpleadoService empleadoService = new EmpleadoService();
             if (empleadoService.RegistrarEmpleado(empleado))
             {
-                ViewBag.Message = "Datos registrados Exitosamente";
+                Session.Add("Mensaje", "Datos registrados Exitosamente");
             }
             else
             {
-                ViewBag.Message = "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132";
+                Session.Add("Mensaje", "Error al modificar los, favor reintente más tarde o contáctese al +56 9 8554 7132");
             }
             return RedirectToAction("Empleados", "Admin");
         }
@@ -205,6 +200,7 @@ namespace ManicureLand.Controllers
                 Session.Add("Mensaje", "Sesion no se encuentra iniciada.");
                 return RedirectToAction("Intranet", "Home");
             }
+            ViewBag.Message = (string)Session["Mensaje"];
             return View("PanelAdmin");
         }
 
