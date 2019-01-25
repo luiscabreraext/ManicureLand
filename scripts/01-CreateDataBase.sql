@@ -76,7 +76,7 @@ GO
 CREATE TABLE [dbo].[Dedo](
 	[idDedo] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	[extremidad] [CHAR](2) NOT NULL,
-	[descripción] [varchar](32) NOT NULL	
+	[descripcion] [varchar](32) NOT NULL	
 	)
 GO
 
