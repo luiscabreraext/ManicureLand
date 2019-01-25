@@ -241,8 +241,16 @@ namespace ManicureLand.Controllers
             return GuardarServicio(servicio);
         }
 
-        public ActionResult ModificarDiseno(Diseno diseno, string accion)
+        [HttpPost]
+        public ActionResult ModificarDiseno(Diseno diseno, string accion, HttpPostedFileBase file)
         {
+            if (file != null)
+            {
+                string archivo = (DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + file.FileName).ToLower();
+                file.SaveAs(Server.MapPath("../img/disenos/" + archivo));
+                diseno.UrlDiseno = "../img/disenos/" + archivo;
+            }
+            
             if (accion.Equals("Modificar"))
             {
                 DisenoService disenoService = new DisenoService();
