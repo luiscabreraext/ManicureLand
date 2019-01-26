@@ -93,7 +93,6 @@ namespace ManicureLand.Services
 
         }
 
-
         public Boolean RegistrarDiseno(Diseno diseno)
         {
             DBAccess dBAccess = new DBAccess();

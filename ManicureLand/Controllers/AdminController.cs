@@ -121,22 +121,26 @@ namespace ManicureLand.Controllers
                 Session.Add("Mensaje", "Sesion no se encuentra iniciada.");                
                 return RedirectToAction("Intranet", "Home");
             }
+
+            if (idEmpleado > 0)
+            {
+                EmpleadoService empleadoService = new EmpleadoService();
+
+                Empleado empleado = new Empleado();
+
+                if (empleadoService.ObtenerEmpleado(idEmpleado, out empleado))
+                {
+                    ModelState.Clear();
+                    ViewBag.boton = "Modificar";
+                    return View(empleado);
+                }
+
+            }
             if (idEmpleado == 0)
             {
                 ViewBag.boton = "Guardar";
                 return View();
-            }
-            EmpleadoService empleadoService = new EmpleadoService();
-
-            Empleado empleado = new Empleado();
-
-            if (empleadoService.ObtenerEmpleado(idEmpleado, out empleado))
-            {
-                ModelState.Clear();
-                ViewBag.boton = "Modificar";
-                return View(empleado);
-            }
-            
+            }            
             Session.Add("Mensaje", "Error la mostrar información del empleado seleccionado");
             return RedirectToAction("Empleados", "Admin");
 

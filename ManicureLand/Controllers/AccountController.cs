@@ -32,6 +32,7 @@ namespace ManicureLand.Controllers
             {
                 if (clienteService.ObtenerCliente(cliente.Correo, out cliente))
                 {
+                    Session.Clear();
                     Session.Add("Cliente", cliente);
                 }
                 return PanelCliente();
@@ -42,6 +43,16 @@ namespace ManicureLand.Controllers
 
         public ActionResult FormularioRegistro()
         {
+            ViewBag.Message = (string)Session["Mensaje"];
+           
+            if ((Cliente)Session["Cliente"] != null)
+            {
+                Cliente cliente = new Cliente();
+                cliente = (Cliente)Session["Cliente"];
+                cliente.Clave = "";
+                cliente.RepetirClave = "";
+                return View(cliente);
+            }
             return View();
         }
 
@@ -100,6 +111,7 @@ namespace ManicureLand.Controllers
         public ActionResult CerrarSession()
         {
             Session.Clear();
+            ModelState.Clear();
             return RedirectToAction("Index", "Home");
         }
 
@@ -146,7 +158,8 @@ namespace ManicureLand.Controllers
             }
             else
             {
-                Session.Add("Message", "Error al registrar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132");
+                Session.Add("Cliente", cliente);
+                Session.Add("Mensaje", "Error al registrar cuenta, favor reintente más tarde o contáctese al +56 9 8554 7132");
                 return RedirectToAction("FormularioRegistro", "Account");
             }
         }
@@ -174,6 +187,8 @@ namespace ManicureLand.Controllers
             ClienteService clienteService = new ClienteService();
             if (clienteService.DeshabilitarCliente(cliente))
             {
+                Session.Clear();
+                ModelState.Clear();
                 Session.Add("Mensaje", "Cuenta deshabilitada exitosamente");
                 return RedirectToAction("Index", "Home");
             }

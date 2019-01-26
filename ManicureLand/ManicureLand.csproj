@@ -185,6 +185,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="img\disenos\foto1.png" />
     <Content Include="img\disenos\foto2.png" />
+    <Content Include="img\sitio\actualizando.png" />
+    <Content Include="img\tienda\1.jpg" />
+    <Content Include="img\tienda\2.jpg" />
+    <Content Include="img\tienda\3.jpg" />
+    <Content Include="img\tienda\4.jpg" />
+    <Content Include="img\tienda\5.jpg" />
+    <Content Include="img\tienda\Logo1.PNG" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

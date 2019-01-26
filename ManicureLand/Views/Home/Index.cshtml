@@ -4,6 +4,13 @@
     ViewBag.Title = "Manicure Land";
 }
 
+<!-- Compiled and minified Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Minified JS library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Compiled and minified Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
     var data = { "usuario": "usuario", "clave": "clave" };
 
@@ -14,7 +21,7 @@
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function (data) {
-                
+
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -35,17 +42,76 @@
             }, 3000);
         }
     }, false);
+
+    $('#myCarouselCustom').carousel();
+
+    $("#prevBtn").click(function () {
+        $("#myCarouselCustom").carousel("prev");
+    });
+    $("#nextBtn").click(function () {
+        $("#myCarouselCustom").carousel("next");
+    });
+
+   
 </script>
 
 <div class="col-md-12">
     <br />
     <div class="col-md-9">
         <h1>Bienvenidos</h1>
+        <div id="myCarousel" class="carousel slide center-block" data-ride="carousel" style="width:600px;height:300px">
+            <ol class="carousel-indicators" >
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="~/img/tienda/1.jpg" alt="" >
+                </div>
+                <div class="item">
+                    <img src="~/img/tienda/2.jpg" alt="" >
+                </div>
+                <div class="item">
+                    <img src="~/img/tienda/3.jpg" alt="" >
+                </div>
+                <div class="item">
+                    <img src="~/img/tienda/4.jpg" alt="" >
+                </div>
+                <div class="item">
+                    <img src="~/img/tienda/5.jpg" alt="" >
+                </div>
+            </div>
+
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
+        <div>
+            <h2>Visitanos!</h2>
+        </div>
+        <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.1361737651023!2d-70.60858468480149!3d-33.419693980782725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf69a982e701%3A0x29c2706f9cc0cee8!2sAv.+Providencia+2398%2C+Santiago%2C+Providencia%2C+Regi%C3%B3n+Metropolitana!5e0!3m2!1ses!2scl!4v1548513142092" width="600" height="300" frameborder="0" style="border:0" allowfullscreen class="center-block"></iframe>
+        </div>
+
     </div>
     <div class="col-md-3">
         @using (Html.BeginForm("Ingresar", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <input type="image" src="~/img/tienda/Logo1.PNG" class="img-responsive" width="388" height="276" />
+            </div>
+
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label col-md-12" })
@@ -97,3 +163,7 @@
     </div>
 
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

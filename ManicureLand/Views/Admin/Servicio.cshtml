@@ -76,7 +76,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <a href="javascript:void(0);" onclick="history.go(-1);"><input type="button" value="Volver" class="btn btn-success" /></a>
+            <input type="button" class="btn btn-success" value="Volver" onclick="@("window.location.href='" + @Url.Action("Servicios", "Admin") + "'");" />
         </div>
     </div>
 </div>

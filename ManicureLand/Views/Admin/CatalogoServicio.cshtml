@@ -5,8 +5,12 @@
 
 <h2>Catalogo Servicio</h2>
 
+<div>
+    <input type="image" src="~/img/sitio/actualizando.png" />
+</div>
+
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-        <a href="javascript:void(0);" onclick="history.go(-1);"><input type="button" value="Volver" class="btn btn-success" /></a>
+        <input type="button" class="btn btn-success" value="Volver" onclick="@("window.location.href='" + @Url.Action("PanelAdmin", "Admin") + "'");" />
     </div>
 </div>

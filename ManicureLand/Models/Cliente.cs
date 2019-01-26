@@ -13,17 +13,17 @@ namespace ManicureLand.Models
 
         [DisplayName("Nombres")]
         [StringLength(64), Required(ErrorMessage = "Campo Requerido")]
-        [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
+        [RegularExpression(@"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string Nombres { get; set; }
 
         [DisplayName("Apellido Paterno")]
         [StringLength(32), Required(ErrorMessage = "Campo Requerido")]
-        [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
+        [RegularExpression(@"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string ApellidoPaterno { get; set; }
 
         [DisplayName("Apellido Materno")]
         [StringLength(32)]
-        [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
+        [RegularExpression(@"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string ApellidoMaterno { get; set; }
 
         [DisplayName("Fecha Nacimiento")]

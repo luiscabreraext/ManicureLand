@@ -13,17 +13,17 @@ namespace ManicureLand.Models
 
         [DisplayName("Nombres")]
         [StringLength(64), Required(ErrorMessage = "Campo Requerido")]
-        [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
+        [RegularExpression(@"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string Nombres { get; set; }
 
         [DisplayName("Apellido Paterno")]
         [StringLength(32), Required(ErrorMessage = "Campo Requerido")]
-        [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
+        [RegularExpression(@"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string ApellidoPaterno { get; set; }
 
         [DisplayName("Apellido Materno")]
         [StringLength(32), Required(ErrorMessage = "Campo Requerido")]
-        [RegularExpression(@"^[a-zA-ZñÑ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
+        [RegularExpression(@"^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s\']+$", ErrorMessage = "Solo puede ingresar letras")]
         public string ApellidoMaterno { get; set; }
 
         [DisplayName("Fecha Nacimiento")]
@@ -56,7 +56,7 @@ namespace ManicureLand.Models
                    ErrorMessage = "Formato incorrecto de telefono, use +56212345678.")]
         public string Telefono { get; set; }
 
-        [DisplayName("Fecha Nacimiento")]
+        [DisplayName("Fecha Registro")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FechaRegistro { get; set; }
