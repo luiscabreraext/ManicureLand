@@ -161,6 +161,7 @@ namespace ManicureLand.Controllers
             if (empleadoService.ListarEmpleados(out listaEmpleados))
             {
                 ViewBag.Message = (string)Session["Mensaje"];
+                Session["Mensaje"] = null;
                 return View(listaEmpleados);
             }
             Session.Add("Mensaje", "Error la mostrar información de los empleados");
@@ -182,6 +183,7 @@ namespace ManicureLand.Controllers
             if (servicioService.ListarServicios(out listaServicios))
             {
                 ViewBag.Message = (string)Session["Mensaje"];
+                Session["Mensaje"] = null;
                 return View(listaServicios);
             }
             Session.Add("Mensaje", "Error la mostrar información de los servicios");
@@ -203,6 +205,7 @@ namespace ManicureLand.Controllers
             if (disenoService.ListarDisenos(out listaDisenos))
             {
                 ViewBag.Message = (string)Session["Mensaje"];
+                Session["Mensaje"] = null;
                 return View(listaDisenos);
             }
             Session.Add("Mensaje", "Error la mostrar información de los diseños");
@@ -372,6 +375,7 @@ namespace ManicureLand.Controllers
                 return RedirectToAction("Intranet", "Home");
             }
             ViewBag.Message = (string)Session["Mensaje"];
+            Session["Mensaje"] = null;
             return View("PanelAdmin");
         }
 

@@ -13,6 +13,7 @@ namespace ManicureLand.Controllers
             if ((string)Session["Mensaje"] != null)
             {
                 ViewBag.Message = (string)Session["Mensaje"];
+                Session["Mensaje"] = null;
                 Session.Remove("Mensaje");
             }            
             return View();
@@ -35,6 +36,7 @@ namespace ManicureLand.Controllers
         public ActionResult Intranet()
         {
             ViewBag.Message = (string)Session["Mensaje"];
+            Session["Mensaje"] = null;
             return View();
         }
     }

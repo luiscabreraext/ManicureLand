@@ -76,6 +76,16 @@ namespace ManicureLand.Services
 
         public bool ModificarCliente(Cliente cliente)
         {
+            if (cliente.ApellidoMaterno == null)
+            {
+                cliente.ApellidoMaterno = "";
+            }
+
+            if (cliente.Telefono == null)
+            {
+                cliente.Telefono = "";
+            }
+
 
             DBAccess dBAccess = new DBAccess();
             string filtro = "idCliente = " + cliente.IdCliente.ToString();
@@ -132,6 +142,17 @@ namespace ManicureLand.Services
 
         public Boolean RegistrarCliente(Cliente cliente) {
             DBAccess dBAccess = new DBAccess();
+
+            if (cliente.ApellidoMaterno == null)
+            {
+                cliente.ApellidoMaterno = "";
+            }
+
+            if (cliente.Telefono == null)
+            {
+                cliente.Telefono = "";
+            }
+            
             List<SqlParameter> parametros = new List<SqlParameter>
             {
                 new SqlParameter("nombres", cliente.Nombres),

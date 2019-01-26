@@ -44,7 +44,8 @@ namespace ManicureLand.Controllers
         public ActionResult FormularioRegistro()
         {
             ViewBag.Message = (string)Session["Mensaje"];
-           
+            Session["Mensaje"] = null;
+
             if ((Cliente)Session["Cliente"] != null)
             {
                 Cliente cliente = new Cliente();
@@ -139,6 +140,7 @@ namespace ManicureLand.Controllers
             {
                 ModelState.Clear();
                 ViewBag.Message = (string)Session["Mensaje"];
+                Session["Mensaje"] = null;
                 return View(cliente);
             }
             else

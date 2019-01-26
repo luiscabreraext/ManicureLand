@@ -82,6 +82,20 @@ namespace ManicureLand.Services
 
         public bool ModificarEmpleado(Empleado empleado)
         {
+            if (empleado.ApellidoMaterno == null)
+            {
+                empleado.ApellidoMaterno = "";
+            }
+
+            if (empleado.Telefono == null)
+            {
+                empleado.Telefono = "";
+            }
+
+            if (empleado.Rut == null)
+            {
+                empleado.Rut = "";
+            }
 
             DBAccess dBAccess = new DBAccess();
             string filtro = "idEmpleado = " + empleado.IdEmpleado.ToString();
@@ -92,6 +106,8 @@ namespace ManicureLand.Services
                 new SqlParameter("apellidoMaterno", empleado.ApellidoMaterno),
                 new SqlParameter("fechaNacimiento", empleado.FechaNacimiento),
                 new SqlParameter("correo", empleado.Correo),
+                new SqlParameter("rut", empleado.Rut),
+                new SqlParameter("fechaRegistro", empleado.FechaRegistro),
                 new SqlParameter("telefono", empleado.Telefono),
                 new SqlParameter("perfil", empleado.Perfil),
             };
@@ -171,6 +187,20 @@ namespace ManicureLand.Services
 
         public Boolean RegistrarEmpleado(Empleado empleado)
         {
+            if (empleado.ApellidoMaterno == null)
+            {
+                empleado.ApellidoMaterno = "";
+            }
+
+            if (empleado.Telefono == null)
+            {
+                empleado.Telefono = "";
+            }
+
+            if (empleado.Rut == null)
+            {
+                empleado.Rut = "";
+            }
             DBAccess dBAccess = new DBAccess();
             List<SqlParameter> parametros = new List<SqlParameter>
             {
