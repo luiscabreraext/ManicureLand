@@ -271,10 +271,7 @@ namespace ManicureLand.Controllers
                 }
                 return RedirectToAction("Disenos", "Admin");
             }
-            if (accion.Equals(null))
-            {
-
-            }
+            
                 return GuardarDiseno(diseno);
         }
 

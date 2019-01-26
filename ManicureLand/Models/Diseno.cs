@@ -31,7 +31,7 @@ namespace ManicureLand.Models
 
         [DisplayName("Subir imagen")]
         [StringLength(8000)]
-        [Required(ErrorMessage = "Campo Requerido")]
+        //[Required(ErrorMessage = "Campo Requerido")]
         public string UrlDiseno { get; set; }
         public bool Estado { get; set; }
 
